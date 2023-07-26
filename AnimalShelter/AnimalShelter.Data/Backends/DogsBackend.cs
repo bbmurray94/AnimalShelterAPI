@@ -43,7 +43,7 @@ namespace AnimalShelter.Data.Backends
                 new Dog
                 {
                     Id = 2,
-                    Name = "Bubby",
+                    Name = "Tico",
                     Description = "Needs harness",
                     Age = 5,
                     HumaneInvestigation = false,

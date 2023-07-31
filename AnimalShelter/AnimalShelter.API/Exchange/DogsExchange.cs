@@ -11,16 +11,16 @@ namespace AnimalShelter.API.Exchange
             {
                 return null;
             }
-            return new DogModel 
-            { 
+            return new DogModel
+            {
                 Id = dog.Id,
                 Name = dog.Name,
                 Description = dog.Description,
-                Age= dog.Age,
+                Age = dog.Age,
                 Sex = dog.Sex,
                 HumaneInvestigation = dog.HumaneInvestigation,
                 Breed = dog.Breed,
-                Level = dog.Level,
+                Level = dog.Level.ToString(),
                 Location = dog.Location,
                 IsHouseBroken = dog.IsHouseBroken,
             };

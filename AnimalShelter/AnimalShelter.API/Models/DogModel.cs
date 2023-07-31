@@ -13,7 +13,7 @@ namespace AnimalShelter.API.Models
         public bool HumaneInvestigation { get; set; }
 
         public string? Breed { get; set; }
-        public Level Level { get; set; }
+        public string Level { get; set; }
 
         public string? Location { get; set; }
         public bool IsHouseBroken { get; set; }

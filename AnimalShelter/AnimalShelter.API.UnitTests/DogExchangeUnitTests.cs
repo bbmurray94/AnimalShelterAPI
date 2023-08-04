@@ -26,6 +26,8 @@ namespace AnimalShelter.API.UnitTests
         private readonly Level AValidLevel2 = Level.Yellow;
         private readonly string? AValidLocation = "Dog Hold A";
         private readonly string? AValidLocation2 = "Dog Hold B";
+        private readonly string? AValidKennelNumber = "13";
+        private readonly string? AValidKennelNumber2 = "12";
         private readonly bool AValidIsHouseBroken = true;
         private readonly bool AValidIsHouseBroken2 = true;
         private readonly string? AValidBreed = "Pit Bull mix";
@@ -44,6 +46,7 @@ namespace AnimalShelter.API.UnitTests
                 Sex = AValidSex,
                 Level = AValidLevel,
                 Location = AValidLocation,
+                KennelNumber = AValidKennelNumber,
                 IsHouseBroken = AValidIsHouseBroken,
                 Breed = AValidBreed,              
             };
@@ -60,6 +63,7 @@ namespace AnimalShelter.API.UnitTests
             Assert.That(model?.Sex, Is.EqualTo(AValidSex));
             Assert.That(model?.Level, Is.EqualTo(AValidLevel.ToString()));
             Assert.That(model?.Location, Is.EqualTo(AValidLocation));
+            Assert.That(model?.KennelNumber, Is.EqualTo(AValidKennelNumber));
             Assert.That(model?.IsHouseBroken, Is.EqualTo(AValidIsHouseBroken));
             Assert.That(model?.Breed, Is.EqualTo(AValidBreed));
         }
@@ -81,6 +85,7 @@ namespace AnimalShelter.API.UnitTests
             Assert.That(model?.Sex, Is.EqualTo(Sex.Unknown));
             Assert.That(model?.Level, Is.EqualTo(Level.Blue.ToString()));
             Assert.That(model?.Location, Is.Null);
+            Assert.That(model?.KennelNumber, Is.Null);
             Assert.That(model?.IsHouseBroken, Is.False);
             Assert.That(model?.Breed, Is.Null);
         }
@@ -111,6 +116,7 @@ namespace AnimalShelter.API.UnitTests
                     Sex = AValidSex,
                     Level = AValidLevel,
                     Location = AValidLocation,
+                    KennelNumber = AValidKennelNumber,
                     IsHouseBroken = AValidIsHouseBroken,
                     Breed = AValidBreed,
                 },
@@ -124,6 +130,7 @@ namespace AnimalShelter.API.UnitTests
                     Sex = AValidSex2,
                     Level = AValidLevel2,
                     Location = AValidLocation2,
+                    KennelNumber = AValidKennelNumber2,
                     IsHouseBroken = AValidIsHouseBroken2,
                     Breed = AValidBreed2,
                 }

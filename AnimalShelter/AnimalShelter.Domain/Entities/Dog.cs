@@ -16,6 +16,7 @@ namespace AnimalShelter.Domain.Entities
         public Level Level { get; set; }
 
         public string? Location { get; set; }
+        public string? KennelNumber { get; set; }
         public bool IsHouseBroken { get; set; }
     }
 }

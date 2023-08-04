@@ -18,6 +18,7 @@ namespace AnimalShelter.Data.Backends
                 Sex = Sex.Male,
                 Level = Level.Green,
                 Location = "Dog Hold A",
+                KennelNumber = "13",
                 IsHouseBroken = true,
                 Breed = "Pit Bull mix",
             };
@@ -37,6 +38,7 @@ namespace AnimalShelter.Data.Backends
                     Sex = Sex.Male,
                     Level = Level.Green,
                     Location = "Dog Hold A",
+                    KennelNumber = "13",
                     IsHouseBroken = true,
                     Breed = "Pit Bull mix",
                 },
@@ -50,6 +52,7 @@ namespace AnimalShelter.Data.Backends
                     Sex = Sex.Male,
                     Level = Level.Green,
                     Location = "Dog Hold A",
+                    KennelNumber = "14",
                     IsHouseBroken = true,
                     Breed = "Pit Bull mix",
                 }

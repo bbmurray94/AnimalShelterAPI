@@ -22,6 +22,7 @@ namespace AnimalShelter.API.Exchange
                 Breed = dog.Breed,
                 Level = dog.Level.ToString(),
                 Location = dog.Location,
+                KennelNumber= dog.KennelNumber,
                 IsHouseBroken = dog.IsHouseBroken,
             };
         }

@@ -10,7 +10,7 @@ namespace AnimalShelter.API.Models
         public string? Description { get; set; }
         public int Age { get; set; }
         public Sex Sex { get; set; }
-        public bool HumaneInvestigation { get; set; }
+        public bool UnderHumaneInvestigation { get; set; }
 
         public string? Breed { get; set; }
         public string Level { get; set; }

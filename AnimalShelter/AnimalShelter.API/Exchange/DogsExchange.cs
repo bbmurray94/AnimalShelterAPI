@@ -18,7 +18,7 @@ namespace AnimalShelter.API.Exchange
                 Description = dog.Description,
                 Age = dog.Age,
                 Sex = dog.Sex,
-                HumaneInvestigation = dog.HumaneInvestigation,
+                UnderHumaneInvestigation = dog.UnderHumaneInvestigation,
                 Breed = dog.Breed,
                 Level = dog.Level.ToString(),
                 Location = dog.Location,

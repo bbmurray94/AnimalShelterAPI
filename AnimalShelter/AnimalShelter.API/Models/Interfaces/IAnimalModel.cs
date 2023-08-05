@@ -9,6 +9,6 @@ namespace AnimalShelter.API.Models.Interfaces
         string? Description { get; set; }
         int Age { get; set; }
         Sex Sex { get; set; }
-        bool HumaneInvestigation { get; set; }
+        bool UnderHumaneInvestigation { get; set; }
     }
 }

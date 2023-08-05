@@ -42,7 +42,7 @@ namespace AnimalShelter.API.UnitTests
                 Name = AValidName,
                 Description = AValidDescription,
                 Age = AValidAge,
-                HumaneInvestigation = AValidHumaneInvestigation,
+                UnderHumaneInvestigation = AValidHumaneInvestigation,
                 Sex = AValidSex,
                 Level = AValidLevel,
                 Location = AValidLocation,
@@ -59,7 +59,7 @@ namespace AnimalShelter.API.UnitTests
             Assert.That(model?.Name, Is.EqualTo(AValidName));
             Assert.That(model?.Description, Is.EqualTo(AValidDescription));
             Assert.That(model?.Age, Is.EqualTo(AValidAge));
-            Assert.That(model?.HumaneInvestigation, Is.EqualTo(AValidHumaneInvestigation));
+            Assert.That(model?.UnderHumaneInvestigation, Is.EqualTo(AValidHumaneInvestigation));
             Assert.That(model?.Sex, Is.EqualTo(AValidSex));
             Assert.That(model?.Level, Is.EqualTo(AValidLevel.ToString()));
             Assert.That(model?.Location, Is.EqualTo(AValidLocation));
@@ -81,7 +81,7 @@ namespace AnimalShelter.API.UnitTests
             Assert.That(model?.Name, Is.Null);
             Assert.That(model?.Description, Is.Null);
             Assert.That(model?.Age, Is.EqualTo(0));
-            Assert.That(model?.HumaneInvestigation, Is.False);
+            Assert.That(model?.UnderHumaneInvestigation, Is.False);
             Assert.That(model?.Sex, Is.EqualTo(Sex.Unknown));
             Assert.That(model?.Level, Is.EqualTo(Level.Blue.ToString()));
             Assert.That(model?.Location, Is.Null);
@@ -112,7 +112,7 @@ namespace AnimalShelter.API.UnitTests
                     Name = AValidName,
                     Description = AValidDescription,
                     Age = AValidAge,
-                    HumaneInvestigation = AValidHumaneInvestigation,
+                    UnderHumaneInvestigation = AValidHumaneInvestigation,
                     Sex = AValidSex,
                     Level = AValidLevel,
                     Location = AValidLocation,
@@ -126,7 +126,7 @@ namespace AnimalShelter.API.UnitTests
                     Name = AValidName2,
                     Description = AValidDescription2,
                     Age = AValidAge2,
-                    HumaneInvestigation = AValidHumaneInvestigation2,
+                    UnderHumaneInvestigation = AValidHumaneInvestigation2,
                     Sex = AValidSex2,
                     Level = AValidLevel2,
                     Location = AValidLocation2,

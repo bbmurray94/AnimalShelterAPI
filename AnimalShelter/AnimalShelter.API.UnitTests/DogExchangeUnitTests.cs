@@ -60,7 +60,7 @@ namespace AnimalShelter.API.UnitTests
             Assert.That(model?.Description, Is.EqualTo(AValidDescription));
             Assert.That(model?.Age, Is.EqualTo(AValidAge));
             Assert.That(model?.UnderHumaneInvestigation, Is.EqualTo(AValidHumaneInvestigation));
-            Assert.That(model?.Sex, Is.EqualTo(AValidSex));
+            Assert.That(model?.Sex, Is.EqualTo(AValidSex.ToString()));
             Assert.That(model?.Level, Is.EqualTo(AValidLevel.ToString()));
             Assert.That(model?.Location, Is.EqualTo(AValidLocation));
             Assert.That(model?.KennelNumber, Is.EqualTo(AValidKennelNumber));
@@ -82,7 +82,7 @@ namespace AnimalShelter.API.UnitTests
             Assert.That(model?.Description, Is.Null);
             Assert.That(model?.Age, Is.EqualTo(0));
             Assert.That(model?.UnderHumaneInvestigation, Is.False);
-            Assert.That(model?.Sex, Is.EqualTo(Sex.Unknown));
+            Assert.That(model?.Sex, Is.EqualTo(Sex.Unknown.ToString()));
             Assert.That(model?.Level, Is.EqualTo(Level.Blue.ToString()));
             Assert.That(model?.Location, Is.Null);
             Assert.That(model?.KennelNumber, Is.Null);

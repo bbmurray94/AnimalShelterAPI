@@ -23,7 +23,11 @@ namespace AnimalShelter.API.Controllers
         [Produces(typeof(List<DogModel>))]
         public async Task<ActionResult<List<DogModel>>> Get() 
         {
-            List<DogModel> models = DogsExchange.Pack(DogsBackend.GetDogList().Result).ToList();
+            List<DogModel>? models = DogsExchange.Pack(DogsBackend.GetDogList().Result).ToList();
+            if (models == null) 
+            {
+                return NotFound();
+            }
             return Ok(models);
         }
 
@@ -31,6 +35,10 @@ namespace AnimalShelter.API.Controllers
         public async Task<ActionResult<DogModel>> Get(int id) 
         {
             DogModel dogModel = DogsExchange.Pack(DogsBackend.GetDog(id).Result);
+            if (dogModel == null) 
+            {
+                return NotFound();
+            }
             return Ok(dogModel);
         }
     }

@@ -14,15 +14,16 @@ namespace AnimalShelter.Data.Backends
             _context = context;
         }
         
-        public async Task<Dog> GetDog(int id)
+        public async Task<Dog?> GetDog(int id)
+        
         {
-            Dog dog = await _context.Dogs.FindAsync(id);
+            Dog? dog = await _context.Dogs.FindAsync(id);
             return dog;
         }
 
         public async Task<IEnumerable<Dog>> GetDogList()
         {
-            List<Dog> dogs = await _context.Dogs.AsNoTrackingWithIdentityResolution().ToListAsync();
+            List<Dog>? dogs = await _context.Dogs.AsNoTrackingWithIdentityResolution().ToListAsync();
             return dogs;
         }
     }

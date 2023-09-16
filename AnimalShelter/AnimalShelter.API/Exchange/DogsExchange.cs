@@ -5,7 +5,7 @@ namespace AnimalShelter.API.Exchange
 {
     public class DogsExchange : IDogsExchange
     {
-        public DogModel? Pack(Dog? dog)
+        public DogModel Pack(Dog? dog)
         {
             if (dog == null) 
             {

@@ -2,7 +2,6 @@
 using AnimalShelter.Data.Interfaces;
 using AnimalShelter.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Xml;
 
 namespace AnimalShelter.Data.Backends
 {

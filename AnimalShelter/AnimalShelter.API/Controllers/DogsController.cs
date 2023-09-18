@@ -2,6 +2,7 @@
 using AnimalShelter.API.Models;
 using AnimalShelter.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace AnimalShelter.API.Controllers
 {
@@ -39,6 +40,18 @@ namespace AnimalShelter.API.Controllers
             {
                 return NotFound();
             }
+            return Ok(dogModel);
+        }
+
+        [HttpPost]
+        [Consumes("application/json")]
+        public async Task<ActionResult<DogModel>> Post([FromBody] DogModel input) 
+        {
+            if (input == null) 
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, "Given Dog is null");
+            }
+            DogModel? dogModel = DogsExchange.Pack(DogsBackend.AddDog(DogsExchange.Unpack(input)).Result);
             return Ok(dogModel);
         }
     }

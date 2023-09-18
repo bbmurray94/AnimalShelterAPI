@@ -7,5 +7,7 @@ namespace AnimalShelter.API.Exchange
     {
         DogModel Pack(Dog? dog);
         IEnumerable<DogModel?> Pack(IEnumerable<Dog?> dogList);
+
+        Dog Unpack(DogModel? dogModel);
     }
 }

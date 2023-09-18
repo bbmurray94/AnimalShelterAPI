@@ -1,5 +1,6 @@
 ﻿using AnimalShelter.API.Models;
 using AnimalShelter.Domain.Entities;
+using AnimalShelter.Domain.Enums;
 
 namespace AnimalShelter.API.Exchange
 {
@@ -41,6 +42,24 @@ namespace AnimalShelter.API.Exchange
             }
 
             return modelList;
+        }
+
+        public Dog Unpack(DogModel dogModel) 
+        {
+            return new Dog
+            {
+                Id = dogModel.Id,
+                Name = dogModel.Name,
+                Description = dogModel.Description,
+                Age = dogModel.Age,
+                Sex = (Sex)Enum.Parse(typeof(Sex), dogModel.Sex),
+                UnderHumaneInvestigation = dogModel.UnderHumaneInvestigation,
+                Breed = dogModel.Breed,
+                Level = (Level)Enum.Parse(typeof(Level), dogModel.Level),
+                Location = dogModel.Location,
+                KennelNumber = dogModel.KennelNumber,
+                IsHouseBroken = dogModel.IsHouseBroken,
+            };
         }
     }
 }

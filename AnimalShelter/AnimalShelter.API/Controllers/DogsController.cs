@@ -54,5 +54,21 @@ namespace AnimalShelter.API.Controllers
             DogModel? dogModel = DogsExchange.Pack(DogsBackend.AddDog(DogsExchange.Unpack(input)).Result);
             return Ok(dogModel);
         }
+
+        [HttpPut("{id}")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<DogModel>> Put([FromBody] DogModel input, int id) 
+        {
+            if (input == null)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, "Given Dog is null");
+            }
+            DogModel? dogModel = DogsExchange.Pack(DogsBackend.UpdateDog(id, DogsExchange.Unpack(input)).Result);
+            if (dogModel == null) 
+            {
+                return NotFound();
+            }
+            return Ok(dogModel);
+        }
     }
 }

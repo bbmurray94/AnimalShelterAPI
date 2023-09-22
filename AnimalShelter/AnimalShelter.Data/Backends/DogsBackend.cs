@@ -32,5 +32,27 @@ namespace AnimalShelter.Data.Backends
             _context.SaveChanges();
             return created.Entity;
         }
+
+        public async Task<Dog?> UpdateDog(int id, Dog dog) 
+        {
+            Dog? dbDog = await _context.Dogs.FindAsync(id);
+            if (dbDog == null) 
+            {
+                return null;
+            }
+            dbDog.Name = dog.Name;
+            dbDog.Description = dog.Description;
+            dbDog.Age = dog.Age;
+            dbDog.Location = dog.Location;
+            dbDog.Sex = dog.Sex;
+            dbDog.Breed = dog.Breed;    
+            dbDog.KennelNumber = dog.KennelNumber;
+            dbDog.Level = dog.Level;
+            dbDog.IsHouseBroken = dog.IsHouseBroken;
+            dbDog.UnderHumaneInvestigation =dog.UnderHumaneInvestigation;
+            _context.SaveChanges();
+
+            return dbDog;
+        }
     }
 }

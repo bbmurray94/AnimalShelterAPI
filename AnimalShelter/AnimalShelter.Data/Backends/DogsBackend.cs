@@ -54,5 +54,17 @@ namespace AnimalShelter.Data.Backends
 
             return dbDog;
         }
+
+        public async Task<bool> DeleteDog(int id) 
+        {
+            Dog? dbDog = await _context.Dogs.FindAsync(id);
+            if (dbDog == null)
+            {
+                return false;
+            }
+            _context.Remove(dbDog);
+            _context.SaveChanges();
+            return true;
+        }
     }
 }

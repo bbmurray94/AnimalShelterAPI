@@ -70,5 +70,16 @@ namespace AnimalShelter.API.Controllers
             }
             return Ok(dogModel);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id) 
+        {
+            bool deleted = DogsBackend.DeleteDog(id).Result;
+            if (!deleted) 
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace AnimalShelter.Data.Interfaces
         Task<Dog?> AddDog(Dog dog);
 
         Task<Dog?> UpdateDog(int id, Dog dog);
+        Task<bool> DeleteDog(int id);
     }
 }

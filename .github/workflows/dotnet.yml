@@ -24,10 +24,12 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       working-directory: ${{env.working-directory}}
+    - name: Testing
       run: echo ${{env.working-directory}}
     - name: Build
       run: dotnet build --no-restore
       working-directory: ${{env.working-directory}}
+    - name: Testing
       run: ${{env.working-directory}}
   Tests:
     needs: Build
@@ -35,5 +37,6 @@ jobs:
     steps:
     - name: Unit Tests
       run: dotnet test AnimalShelter.API.UnitTests --no-build --verbosity normal
+    - name: Testing
       run: ${{env.working-directory}}
 

@@ -15,6 +15,7 @@ env:
 jobs:
   Build:
     runs-on: ubuntu-latest
+    working-directory: ${{env.working-directory}}
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -23,20 +24,13 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: ${{env.working-directory}}
-    - name: Testing
-      run: echo ${{env.working-directory}}
     - name: Build
       run: dotnet build --no-restore
-      working-directory: ${{env.working-directory}}
-    - name: Testing
-      run: ${{env.working-directory}}
   Tests:
     needs: Build
     runs-on: ubuntu-latest
+    working-directory: ${{env.working-directory}}
     steps:
     - name: Unit Tests
       run: dotnet test AnimalShelter.API.UnitTests --no-build --verbosity normal
-    - name: Testing
-      run: ${{env.working-directory}}
 

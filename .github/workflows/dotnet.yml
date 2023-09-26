@@ -28,6 +28,7 @@ jobs:
       run: dotnet build --no-restore
       working-directory: ${{env.working-directory}}
   Tests:
+    runs-on: ubuntu-latest
     steps:
     - name: Unit Tests
       run: dotnet test --no-build --verbosity normal

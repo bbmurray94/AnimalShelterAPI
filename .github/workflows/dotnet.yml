@@ -33,4 +33,5 @@ jobs:
     steps:
     - name: Unit Tests
       run: dotnet test --no-build --verbosity normal
+      working-directory: ${{env.working-directory}}
 

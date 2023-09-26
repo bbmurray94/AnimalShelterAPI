@@ -32,6 +32,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Unit Tests
-      run: dotnet test --no-build --verbosity normal
-      working-directory: ${{env.working-directory}}
+      run: dotnet test AnimalShelter.API.UnitTests --no-build --verbosity normal
 

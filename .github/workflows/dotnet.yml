@@ -29,4 +29,5 @@ jobs:
       working-directory: ${{env.working-directory}}
     - name: Unit Tests
       run: dotnet test AnimalShelter.API.UnitTests --no-build --verbosity normal
+      working-directory: ${{env.working-directory}}
 

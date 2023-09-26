@@ -24,13 +24,16 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       working-directory: ${{env.working-directory}}
+      echo: ${{env.working-directory}}
     - name: Build
       run: dotnet build --no-restore
       working-directory: ${{env.working-directory}}
+      echo: ${{env.working-directory}}
   Tests:
     needs: Build
     runs-on: ubuntu-latest
     steps:
     - name: Unit Tests
       run: dotnet test AnimalShelter.API.UnitTests --no-build --verbosity normal
+      echo: ${{env.working-directory}}
 

@@ -66,5 +66,17 @@ namespace AnimalShelter.Data.Backends
             _context.SaveChanges();
             return true;
         }
+
+        public async Task<DogNote?> GetNoteForDog(int dogId, int noteId) 
+        {
+            DogNote? dogNote = await _context.Notes.Where(d => d.Id == noteId && d.DogId == dogId).FirstOrDefaultAsync();
+            return dogNote;
+        }
+
+        public async Task<IEnumerable<DogNote>> GetNoteListForDog(int id) 
+        {
+            List<DogNote>? dogNotes = await _context.Notes.Where(d => d.DogId == id).AsNoTrackingWithIdentityResolution().ToListAsync();
+            return dogNotes;
+        }
     }
 }

@@ -12,20 +12,20 @@ namespace AnimalShelter.API.Controllers
     {
         private IDogsBackend DogsBackend;
         private IDogsExchange DogsExchange;
-        
+
         public DogsController(IDogsBackend dogsBackend,
-                               IDogsExchange dogsExchange) 
+                               IDogsExchange dogsExchange)
         {
             DogsBackend = dogsBackend;
             DogsExchange = dogsExchange;
         }
-        
+
         [HttpGet]
         [Produces(typeof(List<DogModel>))]
-        public async Task<ActionResult<List<DogModel>>> Get() 
+        public async Task<ActionResult<List<DogModel>>> Get()
         {
             List<DogModel>? models = DogsExchange.Pack(DogsBackend.GetDogList().Result).ToList();
-            if (models == null) 
+            if (models == null)
             {
                 return NotFound();
             }
@@ -33,10 +33,10 @@ namespace AnimalShelter.API.Controllers
         }
 
         [HttpGet("{id}", Name = "GetDogById")]
-        public async Task<ActionResult<DogModel>> Get(int id) 
+        public async Task<ActionResult<DogModel>> Get(int id)
         {
             DogModel dogModel = DogsExchange.Pack(DogsBackend.GetDog(id).Result);
-            if (dogModel == null) 
+            if (dogModel == null)
             {
                 return NotFound();
             }
@@ -45,9 +45,9 @@ namespace AnimalShelter.API.Controllers
 
         [HttpPost]
         [Consumes("application/json")]
-        public async Task<ActionResult<DogModel>> Post([FromBody] DogModel input) 
+        public async Task<ActionResult<DogModel>> Post([FromBody] DogModel input)
         {
-            if (input == null) 
+            if (input == null)
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, "Given Dog is null");
             }
@@ -57,14 +57,14 @@ namespace AnimalShelter.API.Controllers
 
         [HttpPut("{id}")]
         [Consumes("application/json")]
-        public async Task<ActionResult<DogModel>> Put([FromBody] DogModel input, int id) 
+        public async Task<ActionResult<DogModel>> Put([FromBody] DogModel input, int id)
         {
             if (input == null)
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, "Given Dog is null");
             }
             DogModel? dogModel = DogsExchange.Pack(DogsBackend.UpdateDog(id, DogsExchange.Unpack(input)).Result);
-            if (dogModel == null) 
+            if (dogModel == null)
             {
                 return NotFound();
             }
@@ -72,14 +72,36 @@ namespace AnimalShelter.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id) 
+        public async Task<ActionResult> Delete(int id)
         {
             bool deleted = DogsBackend.DeleteDog(id).Result;
-            if (!deleted) 
+            if (!deleted)
             {
                 return NotFound();
             }
             return NoContent();
+        }
+
+        [HttpGet("{id}/notes")]
+        public async Task<ActionResult> GetNoteListForDog(int id) 
+        {
+            List<DogNoteModel>? models = DogsExchange.Pack(DogsBackend.GetNoteListForDog(id).Result).ToList();
+            if (models == null)
+            {
+                return NotFound();
+            }
+            return Ok(models);
+        }
+
+        [HttpGet("{dogId}/notes/{noteId}")]
+        public async Task<ActionResult> GetNoteForDog(int dogId, int noteId) 
+        {
+            DogNoteModel? dogNoteModel = DogsExchange.Pack(DogsBackend.GetNoteForDog(dogId, noteId).Result);
+            if (dogNoteModel == null)
+            {
+                return NotFound();
+            }
+            return Ok(dogNoteModel);
         }
     }
 }

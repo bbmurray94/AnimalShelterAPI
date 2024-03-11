@@ -1,6 +1,7 @@
 ﻿using AnimalShelter.API.Models;
 using AnimalShelter.Domain.Entities;
 using AnimalShelter.Domain.Enums;
+using System.Diagnostics;
 
 namespace AnimalShelter.API.Exchange
 {
@@ -44,6 +45,36 @@ namespace AnimalShelter.API.Exchange
             return modelList;
         }
 
+        public DogNoteModel Pack(DogNote? dogNote)
+        {
+            if (dogNote == null) 
+            {
+                return null;
+            }
+            return new DogNoteModel 
+            {
+                Id = dogNote.Id,
+                DogId = dogNote.DogId,
+                Note = dogNote.Note,
+            };
+        }
+
+        public IEnumerable<DogNoteModel?> Pack(IEnumerable<DogNote?> dogNoteList)
+        {
+            List<DogNoteModel?> modelList = new List<DogNoteModel?>();
+            if (dogNoteList == null)
+            {
+                return modelList;
+            }
+
+            foreach (DogNote? dogNote in dogNoteList)
+            {
+                modelList.Add(Pack(dogNote));
+            }
+
+            return modelList;
+        }
+
         public Dog Unpack(DogModel dogModel) 
         {
             return new Dog
@@ -59,6 +90,20 @@ namespace AnimalShelter.API.Exchange
                 Location = dogModel.Location,
                 KennelNumber = dogModel.KennelNumber,
                 IsHouseBroken = dogModel.IsHouseBroken,
+            };
+        }
+
+        public DogNote? Unpack(DogNoteModel? dogNoteModel)
+        {
+            if (dogNoteModel == null) 
+            {
+                return null;
+            }
+            return new DogNote
+            {
+                Id = dogNoteModel.Id,
+                DogId = dogNoteModel.DogId,
+                Note = dogNoteModel.Note,
             };
         }
     }

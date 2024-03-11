@@ -12,5 +12,7 @@ namespace AnimalShelter.Data.Interfaces
 
         Task<Dog?> UpdateDog(int id, Dog dog);
         Task<bool> DeleteDog(int id);
+        Task<DogNote?> GetNoteForDog(int dogId, int noteId);
+        Task<IEnumerable<DogNote>> GetNoteListForDog(int id);
     }
 }

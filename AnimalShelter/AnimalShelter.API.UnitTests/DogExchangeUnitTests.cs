@@ -14,8 +14,8 @@ namespace AnimalShelter.API.UnitTests
         private readonly int AValidId2 = 2;
         private readonly string? AValidName = "Bubby";
         private readonly string? AValidName2 = "Hero";
-        private readonly string? AValidDescription = "Needs harness";
-        private readonly string? AValidDescription2 = "Bring treats";
+        private readonly string? AValidDescription = "Brown and white";
+        private readonly string? AValidDescription2 = "White and black";
         private readonly int AValidAge = 5;
         private readonly int AValidAge2 = 2;
         private readonly bool AValidHumaneInvestigation = false;
@@ -33,8 +33,13 @@ namespace AnimalShelter.API.UnitTests
         private readonly string? AValidBreed = "Pit Bull mix";
         private readonly string? AValidBreed2 = "Terror mix";
 
+        private readonly int AValidNoteId = 1;
+        private readonly int AValidNoteId2 = 2;
+        private readonly string? AValidNote = "Needs harness";
+        private readonly string? AValidNote2 = "Bring treats";
+
         [Test]
-        public void DogsExchange__ValidObject_ReturnsAValidModel() 
+        public void DogsExchange__Dog_Pack_ValidObject_ReturnsAValidModel() 
         {
             Dog dog = new Dog
             {
@@ -69,7 +74,7 @@ namespace AnimalShelter.API.UnitTests
         }
 
         [Test]
-        public void DogsExchange__EmptyObject_ReturnsNullObject() 
+        public void DogsExchange__Dog_Pack_EmptyObject_ReturnsEmptyObject() 
         {
             Dog dog = new Dog();
 
@@ -91,7 +96,7 @@ namespace AnimalShelter.API.UnitTests
         }
 
         [Test]
-        public void DogsExchange__NullObject_ReturnsNullObject()
+        public void DogsExchange__Dog_Pack_NullObject_ReturnsNullObject()
         {
             Dog? dog = null;
 
@@ -102,7 +107,7 @@ namespace AnimalShelter.API.UnitTests
         }
 
         [Test]
-        public void DogsExchange__List_ValidList_ReturnsAValidModelList() 
+        public void DogsExchange__DogList_Pack_ValidList_ReturnsAValidModelList() 
         {
             List<Dog> dogList = new List<Dog>()
             {
@@ -147,7 +152,7 @@ namespace AnimalShelter.API.UnitTests
         }
 
         [Test]
-        public void DogsExchange__List_EmptyList_ReturnsNullObjectList() 
+        public void DogsExchange__DogList_Pack_EmptyList_ReturnsNullObjectList() 
         {
             List<Dog> dogList = new List<Dog>();
 
@@ -157,5 +162,135 @@ namespace AnimalShelter.API.UnitTests
             Assert.That(modelList, Is.Empty);
         }
 
+        [Test]
+        public void DogsExchange__DogNote_Pack_ValidObject_ReturnsAValidModel() 
+        {
+            DogNote dogNote = new DogNote 
+            {
+                Id = AValidNoteId,
+                DogId = AValidId,
+                Note = AValidNote,
+            };
+
+            DogsExchange dogsExchange = new DogsExchange();
+            DogNoteModel model = dogsExchange.Pack(dogNote);
+
+            Assert.NotNull(model);
+            Assert.That(model.Id, Is.EqualTo(AValidNoteId));
+            Assert.That(model.DogId, Is.EqualTo(AValidId));
+            Assert.That(model.Note, Is.EqualTo(AValidNote));
+        }
+
+        [Test]
+        public void DogsExchange__DogNote_Pack_EmptyObject_ReturnsNullObject() 
+        {
+
+            DogNote dogNote = new DogNote();
+
+            DogsExchange dogExchange = new DogsExchange();
+            DogNoteModel? model = dogExchange.Pack(dogNote);
+
+            Assert.IsNotNull(model);
+            Assert.That(model?.Id, Is.EqualTo(0));
+            Assert.That(model?.DogId, Is.EqualTo(0));
+            Assert.That(model?.Note, Is.Null);
+        }
+
+        [Test]
+        public void DogsExchange__DogNote_Pack_NullObject_ReturnsNullObject()
+        {
+            DogNote? dogNote = null;
+
+            DogsExchange dogExchange = new DogsExchange();
+            DogNoteModel? model = dogExchange.Pack(dogNote);
+
+            Assert.IsNull(model);
+        }
+
+        [Test]
+        public void DogsExchange__DogNoteList_Pack_ValidList_ReturnsAValidModelList() 
+        {
+            List<DogNote> dogNoteList = new List<DogNote>()
+            {
+                new DogNote
+                {
+                    Id = AValidNoteId,
+                    DogId = AValidId,
+                    Note = AValidNote,
+                },
+                new DogNote
+                {
+                    Id = AValidNoteId2,
+                    DogId = AValidId2,
+                    Note = AValidNote2,
+                }
+            };
+
+            DogsExchange dogsExchange = new DogsExchange();
+            List<DogNoteModel?> modelList = dogsExchange.Pack(dogNoteList).ToList();
+
+            Assert.That(modelList, Is.Not.Empty);
+            Assert.That(modelList[0]?.Id, Is.EqualTo(AValidNoteId));
+            Assert.That(modelList[0]?.DogId, Is.EqualTo(AValidId));
+            Assert.That(modelList[0]?.Note, Is.EqualTo(AValidNote));
+            Assert.That(modelList[1]?.Id, Is.EqualTo(AValidNoteId2));
+            Assert.That(modelList[1]?.DogId, Is.EqualTo(AValidId2));
+            Assert.That(modelList[1]?.Note, Is.EqualTo(AValidNote2));
+        }
+
+        [Test]
+        public void DogsExchange__DogNoteList_Pack_EmptyList_ReturnsNullObjectList()
+        {
+            List<DogNote> dogNoteList = new List<DogNote>();
+
+            DogsExchange dogsExchange = new DogsExchange();
+            List<DogNoteModel?> modelList = dogsExchange.Pack(dogNoteList).ToList();
+
+            Assert.That(modelList, Is.Empty);
+        }
+
+        [Test]
+        public void DogsExchange__DogNote_Unpack_ValidModel_ReturnsAValidObject() 
+        {
+            DogNoteModel model = new DogNoteModel 
+            {
+                Id = AValidNoteId,
+                DogId = AValidId,
+                Note = AValidNote,
+            };
+
+            DogsExchange dogsExchange = new DogsExchange();
+            DogNote dogNote = dogsExchange.Unpack(model);
+
+            Assert.NotNull(dogNote);
+            Assert.That(dogNote.Id, Is.EqualTo(AValidNoteId));
+            Assert.That(dogNote.DogId, Is.EqualTo(AValidId));
+            Assert.That(dogNote.Note, Is.EqualTo(AValidNote));
+        }
+
+        [Test]
+        public void DogsExchange__Dog_Unpack_EmptyObject_ReturnsEmptyObject() 
+        {
+            DogNoteModel model = new DogNoteModel();
+
+            DogsExchange dogsExchange = new DogsExchange();
+            DogNote dogNote = dogsExchange.Unpack(model);
+
+            Assert.NotNull(dogNote);
+            Assert.That(dogNote?.Id, Is.EqualTo(0));
+            Assert.That(dogNote?.DogId, Is.EqualTo(0));
+            Assert.That(dogNote?.Note, Is.Null);
+        }
+
+        [Test]
+        public void DogsExchange__DogNote_Unpack_NullObject_ReturnsNullObject()
+        {
+            DogNoteModel? model = null;
+
+            DogsExchange dogExchange = new DogsExchange();
+            DogNote? dogNote = dogExchange.Unpack(model);
+
+            Assert.IsNull(model);
+        }
     }
 }

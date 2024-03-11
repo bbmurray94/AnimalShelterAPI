@@ -11,6 +11,7 @@ namespace AnimalShelter.Data.Data
            
         }
         public virtual DbSet<Dog> Dogs { get; set; }
+        public virtual DbSet<DogNote> Notes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {

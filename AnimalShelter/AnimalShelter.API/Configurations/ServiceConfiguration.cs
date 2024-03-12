@@ -10,6 +10,8 @@ namespace AnimalShelter.API.Configurations
         {
             services.AddScoped<IDogsBackend, DogsBackend>()
                 .AddScoped<IDogsExchange, DogsExchange>();
+            services.AddScoped<IWalkersBackend, WalkersBackend>()
+                .AddScoped<IWalkersExchange, WalkersExchange>();
         }
     }
 }

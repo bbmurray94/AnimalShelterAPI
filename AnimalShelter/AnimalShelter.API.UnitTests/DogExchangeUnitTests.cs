@@ -3,8 +3,6 @@ using AnimalShelter.API.Models;
 using AnimalShelter.Domain.Entities;
 using AnimalShelter.Domain.Enums;
 using NUnit.Framework;
-using System.Diagnostics;
-using System.Reflection;
 
 namespace AnimalShelter.API.UnitTests
 {

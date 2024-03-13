@@ -54,7 +54,7 @@ namespace AnimalShelter.API.UnitTests
         }
 
         [Test]
-        public void WalkersExchange__Dog_Pack_NullObject_ReturnsNullObject()
+        public void WalkersExchange__Walker_Pack_NullObject_ReturnsNullObject()
         {
             Walker? walker = null;
 
@@ -100,7 +100,7 @@ namespace AnimalShelter.API.UnitTests
         }
 
         [Test]
-        public void WalkersExchange__DogList_Pack_EmptyList_ReturnsNullObjectList()
+        public void WalkersExchange__WalkerList_Pack_EmptyList_ReturnsNullObjectList()
         {
             List<Walker> walkerList = new List<Walker>();
 

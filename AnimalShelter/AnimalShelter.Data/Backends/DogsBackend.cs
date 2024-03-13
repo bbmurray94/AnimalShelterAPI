@@ -78,5 +78,43 @@ namespace AnimalShelter.Data.Backends
             List<DogNote>? dogNotes = await _context.Notes.Where(d => d.DogId == id).AsNoTrackingWithIdentityResolution().ToListAsync();
             return dogNotes;
         }
+
+        public async Task<DogNote?> AddNote(DogNote dogNote) 
+        {
+            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<DogNote> created = _context.Notes.Add(dogNote);
+            _context.SaveChanges();
+            return created.Entity;
+        }
+        public async Task<DogNote?> UpdateNote(int dogId, int noteId, DogNote dogNote) 
+        {
+            DogNote dbDogNote =  _context.Notes.Where(d => d.DogId == dogId && d.Id == noteId).FirstOrDefault();
+            if (dbDogNote == null)
+            {
+                return null;
+            }
+            dbDogNote.Note = dogNote.Note;
+            if (dogId != dogNote.DogId && dogNote.DogId != 0)
+            {
+                dbDogNote.DogId = dogNote.DogId;
+            }
+            else 
+            {
+                dbDogNote.DogId = dogId;
+            }
+            _context.SaveChanges();
+
+            return dbDogNote;
+        }
+        public async Task<bool> DeleteNote(int dogId, int noteId)
+        {
+            DogNote? dbDogNote = _context.Notes.Where(d => d.DogId == dogId && d.Id == noteId).FirstOrDefault();
+            if (dbDogNote == null)
+            {
+                return false;
+            }
+            _context.Remove(dbDogNote);
+            _context.SaveChanges();
+            return true;
+        }
     }
 }

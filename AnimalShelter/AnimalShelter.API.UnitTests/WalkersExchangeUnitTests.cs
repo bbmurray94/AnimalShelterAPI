@@ -18,9 +18,9 @@ namespace AnimalShelter.API.UnitTests
         private readonly Level AValidLevel2 = Level.Yellow;
 
         [Test]
-        public void WalkersExchange__Walker_Pack_ValidObject_ReturnsAValidModel() 
+        public void WalkersExchange__Walker_Pack_ValidObject_ReturnsAValidModel()
         {
-            Walker walker = new Walker 
+            Walker walker = new Walker
             {
                 Id = AValidId,
                 FirstName = AValidFirstName,
@@ -54,7 +54,7 @@ namespace AnimalShelter.API.UnitTests
         }
 
         [Test]
-        public void DogsExchange__Dog_Pack_NullObject_ReturnsNullObject() 
+        public void WalkersExchange__Walker_Pack_NullObject_ReturnsNullObject()
         {
             Walker? walker = null;
 
@@ -65,7 +65,7 @@ namespace AnimalShelter.API.UnitTests
         }
 
         [Test]
-        public void WalkersExchange__WalkerList_Pack_ValidList_ReturnsAValidModelList() 
+        public void WalkersExchange__WalkerList_Pack_ValidList_ReturnsAValidModelList()
         {
             List<Walker> walkerList = new List<Walker>()
             {
@@ -100,7 +100,7 @@ namespace AnimalShelter.API.UnitTests
         }
 
         [Test]
-        public void DogsExchange__DogList_Pack_EmptyList_ReturnsNullObjectList() 
+        public void WalkersExchange__WalkerList_Pack_EmptyList_ReturnsNullObjectList()
         {
             List<Walker> walkerList = new List<Walker>();
 
@@ -108,6 +108,52 @@ namespace AnimalShelter.API.UnitTests
             List<WalkerModel?> modelList = walkersExchange.Pack(walkerList).ToList();
 
             Assert.That(modelList, Is.Empty);
+        }
+
+        [Test]
+        public void WalkersExchange__Walker_Unpack_ValidModel_ReturnsAValidObject()
+        {
+            WalkerModel model = new WalkerModel
+            {
+                Id = AValidId,
+                FirstName = AValidFirstName,
+                LastName = AValidLastName,
+                Level = AValidLevel.ToString(),
+            };
+
+            WalkersExchange walkerExchange = new WalkersExchange();
+            Walker? walker = walkerExchange.Unpack(model);
+
+            Assert.NotNull(walker);
+            Assert.That(walker?.Id, Is.EqualTo(AValidId));
+            Assert.That(walker?.FirstName, Is.EqualTo(AValidFirstName));
+            Assert.That(walker?.LastName, Is.EqualTo(AValidLastName));
+            Assert.That(walker?.Level, Is.EqualTo(AValidLevel));
+        }
+        [Test]
+        public void WalkersExchange__Walker_Unpack_NullModel_ReturnsNullObject()
+        {
+            WalkerModel model = null;
+
+            WalkersExchange walkersExchange = new WalkersExchange();
+            Walker? walker = walkersExchange.Unpack(model);
+
+            Assert.Null(walker);
+        }
+
+        [Test]
+        public void WalkersExchange__Walker_Unpack_EmptyModel_ReturnsEmptyObject() 
+        {
+            WalkerModel model = new WalkerModel();
+
+            WalkersExchange walkersExchange = new WalkersExchange();
+            Walker? walker = walkersExchange.Unpack(model);
+
+            Assert.NotNull(walker);
+            Assert.That(walker?.Id, Is.EqualTo(0));
+            Assert.That(walker?.FirstName, Is.Null);
+            Assert.That(walker?.LastName, Is.Null);
+            Assert.That(walker?.Level, Is.EqualTo(Level.Blue));
         }
     }
 }

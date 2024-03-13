@@ -1,5 +1,6 @@
 ﻿using AnimalShelter.API.Models;
 using AnimalShelter.Domain.Entities;
+using AnimalShelter.Domain.Enums;
 
 namespace AnimalShelter.API.Exchange
 {
@@ -34,6 +35,23 @@ namespace AnimalShelter.API.Exchange
             }
 
             return modelList;
+        }
+
+        public Walker? Unpack(WalkerModel? walkerModel)
+        
+        
+        {
+            if (walkerModel == null) 
+            {
+                return null;
+            }
+            return new Walker
+            {
+                Id = walkerModel.Id,
+                FirstName = walkerModel.FirstName,
+                LastName = walkerModel.LastName,
+                Level = string.IsNullOrEmpty(walkerModel.Level) ?  Level.Blue : (Level)Enum.Parse(typeof(Level), walkerModel.Level),
+            };
         }
     }
 }

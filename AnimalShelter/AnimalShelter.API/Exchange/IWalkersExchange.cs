@@ -7,5 +7,6 @@ namespace AnimalShelter.API.Exchange
     {
         WalkerModel? Pack(Walker? walker);
         IEnumerable<WalkerModel?> Pack(IEnumerable<Walker?> walkerList);
+        Walker? Unpack(WalkerModel? walkerModel);
     }
 }

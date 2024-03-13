@@ -103,5 +103,45 @@ namespace AnimalShelter.API.Controllers
             }
             return Ok(dogNoteModel);
         }
+
+        [HttpPost("{dogId}/notes")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<DogNoteModel>> Post([FromBody] DogNoteModel input, int dogId) 
+        {
+            if (input == null)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, "Given Note is null");
+            }
+            input.DogId = dogId;
+            DogNoteModel? dogNoteModel = DogsExchange.Pack(DogsBackend.AddNote(DogsExchange.Unpack(input)).Result);
+            return Ok(dogNoteModel);
+        }
+
+        [HttpPut("{dogId}/notes/{noteId}")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<DogNoteModel>> Put([FromBody] DogNoteModel input, int dogId, int noteId)
+        {
+            if (input == null)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, "Given Dog is null");
+            }
+            DogNoteModel? dogNoteModel = DogsExchange.Pack(DogsBackend.UpdateNote(dogId, noteId, DogsExchange.Unpack(input)).Result);
+            if (dogNoteModel == null)
+            {
+                return NotFound();
+            }
+            return Ok(dogNoteModel);
+        }
+
+        [HttpDelete("{dogId}/notes/{noteId}")]
+        public async Task<ActionResult> Delete(int dogId, int noteId)
+        {
+            bool deleted = DogsBackend.DeleteNote(dogId, noteId).Result;
+            if (!deleted)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
     }
 }

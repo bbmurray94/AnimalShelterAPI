@@ -35,15 +35,15 @@ namespace AnimalShelter.API.Exchange
             };
         }
 
-        public IEnumerable<DogActivityModel?> Pack(IEnumerable<DogActivity?> activityList)
+        public IEnumerable<DogActivityModel?> Pack(IEnumerable<DogActivity?> dogActivityList)
         {
             List<DogActivityModel?> modelList = new List<DogActivityModel?>();
-            if (activityList == null)
+            if (dogActivityList == null)
             {
                 return modelList;
             }
 
-            foreach (DogActivity? dogActivity in activityList)
+            foreach (DogActivity? dogActivity in dogActivityList)
             {
                 modelList.Add(Pack(dogActivity));
             }

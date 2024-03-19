@@ -13,6 +13,7 @@ namespace AnimalShelter.Data.Data
         public virtual DbSet<Dog> Dogs { get; set; }
         public virtual DbSet<DogNote> Notes { get; set; }
         public virtual DbSet<Walker> Walkers { get; set; }
+        public virtual DbSet<DogActivity> DogActivities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
@@ -20,6 +21,9 @@ namespace AnimalShelter.Data.Data
             modelBuilder.Entity<Dog>().Property(e => e.Sex).HasConversion(v => v.ToString(), v => (Sex)Enum.Parse(typeof(Sex), v));
 
             modelBuilder.Entity<Walker>().Property(e => e.Level).HasConversion(v => v.ToString(), v => (Level)Enum.Parse(typeof(Level), v));
+
+            modelBuilder.Entity<DogActivity>().Property(e => e.Type).HasConversion(v => v.ToString(), v => (DogActivityType)Enum.Parse(typeof(DogActivityType), v.Replace(" ", "")));
+            modelBuilder.Entity<DogActivity>().Property(e => e.Timeslot).HasConversion(v => v.ToString(), v => (Timeslot)Enum.Parse(typeof(Timeslot), v));
         }
     }
 }

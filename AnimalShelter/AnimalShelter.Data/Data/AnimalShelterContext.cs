@@ -22,7 +22,7 @@ namespace AnimalShelter.Data.Data
 
             modelBuilder.Entity<Walker>().Property(e => e.Level).HasConversion(v => v.ToString(), v => (Level)Enum.Parse(typeof(Level), v));
 
-            modelBuilder.Entity<DogActivity>().Property(e => e.Type).HasConversion(v => v.ToString(), v => (DogActivityType)Enum.Parse(typeof(DogActivityType), v.Replace(" ", "")));
+            modelBuilder.Entity<DogActivity>().Property(e => e.Type).HasConversion(v => v.ToString(), v => (DogActivityType)Enum.Parse(typeof(DogActivityType), v));
             modelBuilder.Entity<DogActivity>().Property(e => e.Timeslot).HasConversion(v => v.ToString(), v => (Timeslot)Enum.Parse(typeof(Timeslot), v));
         }
     }

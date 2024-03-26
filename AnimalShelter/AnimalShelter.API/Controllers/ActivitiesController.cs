@@ -3,6 +3,7 @@ using AnimalShelter.API.Models;
 using AnimalShelter.Data.Backends;
 using AnimalShelter.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace AnimalShelter.API.Controllers
 {
@@ -41,6 +42,46 @@ namespace AnimalShelter.API.Controllers
                 return NotFound();
             }
             return Ok(dogActivityModel);
+        }
+
+        [HttpPost]
+        [Consumes("application/json")]
+        public async Task<ActionResult<int>> Post([FromBody] DogActivityCreationModel input)
+        {
+            if (input == null)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, "Request Body is empoty");
+            }
+            int id = ActivitiesBackend.AddDogActivity(ActivitiesExchange.Unpack(input)).Result.Id;
+
+            return Created($"/api/activities/{id}", id );
+        }
+
+        [HttpPut("{id}")]
+        [Consumes("application/json")]
+        public async Task<ActionResult> Put([FromBody] DogActivityCreationModel input, int id)
+        {
+            if (input == null)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, "Given Dog is null");
+            }
+            DogActivityModel? dogModel = ActivitiesExchange.Pack(ActivitiesBackend.UpdateDogActivity(id, ActivitiesExchange.Unpack(input)).Result);
+            if (dogModel == null)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            bool deleted = ActivitiesBackend.DeleteDogActivity(id).Result;
+            if (!deleted)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }

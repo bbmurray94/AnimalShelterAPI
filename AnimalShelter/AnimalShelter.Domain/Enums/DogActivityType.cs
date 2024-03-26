@@ -5,10 +5,10 @@ namespace AnimalShelter.Domain.Enums
 {
     public enum DogActivityType
     {
-        ShortWalk,
-        LongWalk,
-        PlayYard,
-        FieldTrip,
-        PackWalk,
+        Short_Walk,
+        Long_Walk,
+        Play_Yard,
+        Field_Trip,
+        Pack_Walk,
     }
 }

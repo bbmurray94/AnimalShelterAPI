@@ -6,5 +6,8 @@ namespace AnimalShelter.Data.Interfaces
     {
         Task<IEnumerable<DogActivity>> GetDogActivityList();
         Task<DogActivity> GetDogActivity(int id);
+        Task<DogActivity?> AddDogActivity(DogActivity activity);
+        Task<DogActivity?> UpdateDogActivity(int id, DogActivity activity);
+        Task<bool> DeleteDogActivity(int id);
     }
 }

@@ -11,5 +11,7 @@ namespace AnimalShelter.Domain.Entities
         public DateTime Date { get; set; }
         public Timeslot Timeslot { get; set; }
         public DogActivityType Type { get; set; }
+        public int? DogId { get; set; }
+        public int? WalkerId { get; set; }
     }
 }

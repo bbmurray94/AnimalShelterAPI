@@ -12,12 +12,15 @@ namespace AnimalShelter.API.Controllers
     {
         private IDogsBackend DogsBackend;
         private IDogsExchange DogsExchange;
+        private IActivitiesExchange ActivitiesExchange;
 
         public DogsController(IDogsBackend dogsBackend,
-                               IDogsExchange dogsExchange)
+                               IDogsExchange dogsExchange,
+                               IActivitiesExchange activitiesExchange)
         {
             DogsBackend = dogsBackend;
             DogsExchange = dogsExchange;
+            ActivitiesExchange = activitiesExchange;
         }
 
         [HttpGet]
@@ -142,6 +145,13 @@ namespace AnimalShelter.API.Controllers
                 return NotFound();
             }
             return NoContent();
+        }
+
+        [HttpGet("{dogId}/activities")]
+        public async Task<ActionResult> GetActivitiesForDog(int dogId) 
+        {
+            List<DogActivityModel>? model = ActivitiesExchange.Pack(DogsBackend.GetActivitiesForDog(dogId).Result).ToList();
+            return Ok(model);
         }
     }
 }

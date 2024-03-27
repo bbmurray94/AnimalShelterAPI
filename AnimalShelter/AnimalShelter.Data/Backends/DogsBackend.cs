@@ -116,5 +116,11 @@ namespace AnimalShelter.Data.Backends
             _context.SaveChanges();
             return true;
         }
+
+        public async Task<IEnumerable<DogActivity>> GetActivitiesForDog(int id)
+        {
+            List<DogActivity>? dogActivities = await _context.DogActivities.Where(d => d.DogId == id).Include(da => da.Walker).Include(da => da.Dog).AsNoTrackingWithIdentityResolution().ToListAsync();
+            return dogActivities;
+        }
     }
 }

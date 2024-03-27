@@ -1,9 +1,6 @@
 ﻿using AnimalShelter.API.Models;
 using AnimalShelter.Domain.Entities;
 using AnimalShelter.Domain.Enums;
-using System.Diagnostics;
-using System.Globalization;
-using System.Runtime.CompilerServices;
 
 namespace AnimalShelter.API.Exchange
 {

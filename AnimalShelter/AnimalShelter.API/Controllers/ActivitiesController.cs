@@ -1,6 +1,5 @@
 ﻿using AnimalShelter.API.Exchange;
 using AnimalShelter.API.Models;
-using AnimalShelter.Data.Backends;
 using AnimalShelter.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;

@@ -14,6 +14,8 @@ namespace AnimalShelter.API.Configurations
                 .AddScoped<IWalkersExchange, WalkersExchange>();
             services.AddScoped<IActivitiesBackend, ActivitiesBackend>()
                 .AddScoped<IActivitiesExchange, ActivitiesExchange>();
+            services.AddScoped<IBoardBackend, BoardBackend>()
+                .AddScoped<IBoardExchange, BoardExchange>();
         }
     }
 }

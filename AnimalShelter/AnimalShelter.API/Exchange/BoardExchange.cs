@@ -42,7 +42,7 @@ namespace AnimalShelter.API.Exchange
             };
         }
 
-        public BoardDogActivityItemModel? Pack(BoardDogActivityItem boardDogActivityItem)
+        public BoardDogActivityItemModel? Pack(BoardDogActivityItem? boardDogActivityItem)
         {
             if (boardDogActivityItem == null) 
             {
@@ -50,11 +50,11 @@ namespace AnimalShelter.API.Exchange
             }
             return new BoardDogActivityItemModel
             { 
-                 Date = boardDogActivityItem.Date.ToString("yyyy-MM-dd"),
-                 Timeslot = boardDogActivityItem.Timeslot.ToString(),
-                 Type = boardDogActivityItem.Type.ToString(),
-                 FirstName = boardDogActivityItem.FirstName.ToString(),
-                 LastName = boardDogActivityItem.LastName.ToString(),
+                 Date = boardDogActivityItem.Date?.ToString("yyyy-MM-dd"),
+                 Timeslot = boardDogActivityItem.Timeslot?.ToString(),
+                 Type = boardDogActivityItem.Type?.ToString(),
+                 FirstName = boardDogActivityItem.FirstName?.ToString(),
+                 LastName = boardDogActivityItem.LastName?.ToString(),
             };
         }
     }

@@ -11,8 +11,8 @@ namespace AnimalShelter.Domain.Common
         public Level Level { get; set; }
         public bool IsHouseBroken { get; set; }
         public bool UnderHumaneInvestigation { get; set; }
-        public BoardDogActivityItem Morning { get; set; }
-        public BoardDogActivityItem Afternoon { get; set; }
-        public BoardDogActivityItem Evening { get; set; }
+        public BoardDogActivityItem? Morning { get; set; }
+        public BoardDogActivityItem? Afternoon { get; set; }
+        public BoardDogActivityItem? Evening { get; set; }
     }
 }

@@ -13,11 +13,11 @@ namespace AnimalShelter.Domain.Entities
         public Level Level { get; set; }
         public bool IsHouseBroken { get; set; }
         public bool UnderHumaneInvestigation { get; set; }
-        public DateTime Date {  get; set; }
-        public DogActivityType Type { get; set; }
-        public Timeslot Timeslot { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public DateTime? Date {  get; set; }
+        public DogActivityType? Type { get; set; }
+        public Timeslot? Timeslot { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
 
     }
 }

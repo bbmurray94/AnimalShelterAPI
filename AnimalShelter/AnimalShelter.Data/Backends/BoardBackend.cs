@@ -11,7 +11,7 @@ namespace AnimalShelter.Data.Backends
     public class BoardBackend : IBoardBackend
     {
         private readonly AnimalShelterContext _context;
-        private string[] formats = { "yyyy-MM-dd" };
+        private string[] formats = { "yyyy-MM-dd", "MM-dd-yyyy", "MM/dd/yyyy" };
 
         public BoardBackend(AnimalShelterContext context)
         {
@@ -20,12 +20,13 @@ namespace AnimalShelter.Data.Backends
 
         public async Task<IEnumerable<BoardDogItem>> GetBoard(string? selectedDate)
         {
+            DateTime date;
             if (selectedDate == null || !DateTime.TryParseExact(selectedDate, formats, CultureInfo.InvariantCulture
-                , DateTimeStyles.None, out DateTime date)) 
+                , DateTimeStyles.None, out date)) 
             {
-                selectedDate = DateTime.Today.ToString(formats[0]);
+                date = DateTime.Today;
             }
-            IEnumerable<BoardEntry?> entries = _context.BoardEntries.FromSql($"Call GetBoard({selectedDate})");
+            IEnumerable<BoardEntry?> entries = _context.BoardEntries.FromSql($"Call GetBoard({date.ToString(formats[0])})");
             List<BoardDogItem> result = new List<BoardDogItem>();
 
             foreach (BoardEntry b in entries) 

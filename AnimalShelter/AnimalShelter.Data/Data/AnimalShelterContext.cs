@@ -15,6 +15,8 @@ namespace AnimalShelter.Data.Data
         public virtual DbSet<Walker> Walkers { get; set; }
         public virtual DbSet<DogActivity> DogActivities { get; set; }
         public virtual DbSet<BoardEntry> BoardEntries { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {

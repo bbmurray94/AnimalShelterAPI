@@ -1,4 +1,5 @@
 ﻿using AnimalShelter.Data.Interfaces;
+using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 
 namespace AnimalShelter.API.Middlewares
@@ -20,32 +21,29 @@ namespace AnimalShelter.API.Middlewares
 
         public async Task InvokeAsync(HttpContext context) 
         {
-            if (!context.Request.Headers.TryGetValue("Authorization", out var authorizationHeader)) 
+            if (allowAnonymous)
             {
-                if (allowAnonymous) 
-                {
-                    await next(context);
-                    return;
-                }
+                await next(context);
+                return;
+            }
 
+            string cookieValue = context.Request.Cookies["authToken"];
+
+            if (!context.Request.Headers.TryGetValue("Authorization", out var authorizationHeader) && cookieValue.IsNullOrEmpty()) 
+            {
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 await context.Response.WriteAsync("Unauthorized: Missing Authorization header");
                 return;
             }
 
-            string token = authorizationHeader.ToString().Split(' ')[1];
+
+
+            string? token = !cookieValue.IsNullOrEmpty() ? cookieValue :authorizationHeader.ToString().Split(' ')[1];
 
             // Extract claims from the validated token & Create a ClaimsPrincipal based on the validated token claims
             var claimsPrincipal = await usersBackend.ValidateTokenAsync(token);
             if (claimsPrincipal == null)
             {
-                // If the token is not valid, but allowAnonymous is true, allow the request
-                if (allowAnonymous)
-                {
-                    await next(context);
-                    return;
-                }
-
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 await context.Response.WriteAsync("Unauthorized: Invalid token.");
                 return;

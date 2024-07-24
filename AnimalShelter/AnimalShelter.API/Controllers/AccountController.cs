@@ -28,6 +28,13 @@ namespace AnimalShelter.API.Controllers
             {
                 return NotFound("Username or password is incorrect");
             }
+
+            Response.Cookies.Append("authToken", token.AccessToken, new CookieOptions
+            { 
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict
+            });
             return Ok(token);
         }
     }

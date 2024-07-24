@@ -12,6 +12,6 @@ namespace AnimalShelter.Data.Interfaces
         Task<User> UpdateUserAsync(User user);
         Task<JwtToken> LogIn(string username, string password);
 
-        Task<ClaimsPrincipal?> ValidateTokenAsync(string token); 
+        Task<ClaimsPrincipal?> ValidateTokenAsync(string? token); 
     }
 }

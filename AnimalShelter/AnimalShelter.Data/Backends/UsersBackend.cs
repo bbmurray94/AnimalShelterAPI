@@ -65,8 +65,12 @@ namespace AnimalShelter.Data.Backends
             return jwtToken;
         }
 
-        public async Task<ClaimsPrincipal?> ValidateTokenAsync(string token) 
+        public async Task<ClaimsPrincipal?> ValidateTokenAsync(string? token) 
         {
+            if (token == null) 
+            {
+                return null;
+            }
             try
             {
                 JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();

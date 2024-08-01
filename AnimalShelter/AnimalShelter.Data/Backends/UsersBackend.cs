@@ -48,9 +48,20 @@ namespace AnimalShelter.Data.Backends
             return await Context.Users.Include(u => u.UserRole).ToListAsync();
         }
 
-        public async Task<JwtToken> LogIn(string username, string password) 
+        public async Task<User?> GetUserAsync(int id) 
         {
-            User user = Context.Users.Include(user => user.UserRole).FirstOrDefault(u => u.Username.Equals(username));
+            User? user = await Context.Users.Include(u => u.UserRole).FirstOrDefaultAsync(u => u.Id.Equals(id));
+            if (user == null) 
+            {
+                return null;
+            }
+
+            return user;
+        }
+
+        public async Task<JwtToken?> LogIn(string username, string password) 
+        {
+            User? user = Context.Users.Include(user => user.UserRole).FirstOrDefault(u => u.Username.Equals(username));
             if (user == null) 
             {
                 return null;

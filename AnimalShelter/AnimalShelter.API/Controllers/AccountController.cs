@@ -1,4 +1,5 @@
-﻿using AnimalShelter.API.Exchange;
+﻿using AnimalShelter.API.Attributes;
+using AnimalShelter.API.Exchange;
 using AnimalShelter.API.Models; 
 using AnimalShelter.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -33,9 +34,49 @@ namespace AnimalShelter.API.Controllers
             { 
                 HttpOnly = true,
                 Secure = true,
-                SameSite = SameSiteMode.Strict
+                SameSite = SameSiteMode.Strict,
+                Expires = token.AccessTokenExpiration
             });
             return Ok(token);
+        }
+
+        [HttpPost("logout")]
+        public ActionResult Logout() 
+        {
+            Response.Cookies.Append("authToken", "", new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTimeOffset.UtcNow.AddDays(-1)
+            });
+            
+            return Ok(new { message = "Logged out successfully"});
+        }
+
+        [HttpGet("currentUser")]
+        [AuthorizeMiddleware("Administrator")]
+        public ActionResult<UserModel> CurrentUser() 
+        {
+            string? contextId = HttpContext?.Items["id"]?.ToString();
+            if (contextId == null) 
+            {
+                return NotFound();
+            }
+            
+            if (!int.TryParse(contextId, out int id)) 
+            {
+                return NotFound();
+            }
+
+            UserModel? model = UsersExchange.Pack(UsersBackend.GetUserAsync(id).Result);
+
+            if (model == null) 
+            {
+                return NotFound();
+            }
+
+            return Ok(model);
         }
     }
 }

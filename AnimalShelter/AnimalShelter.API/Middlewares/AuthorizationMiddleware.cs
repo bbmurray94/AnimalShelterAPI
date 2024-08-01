@@ -52,8 +52,13 @@ namespace AnimalShelter.API.Middlewares
             context.User = claimsPrincipal;
 
             ClaimsIdentity claimsIdentity = context.User.Identity as ClaimsIdentity;
+            string userId = claimsIdentity?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             string userName = claimsIdentity?.FindFirst(ClaimTypes.Name)?.Value;
             string roleClaim = claimsIdentity?.FindFirst(ClaimTypes.Role)?.Value;
+
+            context.Items["id"] = userId;
+            context.Items["username"] = userName;
+            context.Items["role"] = roleClaim;
 
             if (roleClaim == null || !roles.Contains(roleClaim))
             {
